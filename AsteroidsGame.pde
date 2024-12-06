@@ -45,6 +45,7 @@ public void draw() {
     
     if ( dist(asteroids.get(i).getCenX(), asteroids.get(i).getCenY(), one.getX(), one.getY()) < 20){
       asteroids.remove(i);
+      i--;
     }
     
   }
