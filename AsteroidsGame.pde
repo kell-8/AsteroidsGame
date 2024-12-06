@@ -1,7 +1,11 @@
-//your variable declarations hsere
 Spaceship one = new Spaceship();
 Star [] stars = new Star[150];
+ArrayList <Asteroid> asteroids = new ArrayList <Asteroid>();
 
+boolean wPressed = false;
+boolean aPressed = false;
+boolean sPressed = false;
+boolean dPressed = false;
 
 public void setup() {
   size(500, 500);
@@ -9,28 +13,68 @@ public void setup() {
   for (int i = 0; i < stars.length; i++) {
     stars[i] = new Star();
   }
+
+  for (int i = 0; i < 10; i++) {
+    asteroids.add(new Asteroid());
+  }
 }
 
 public void draw() {
   background(0);
+  
   one.show();
   one.move();
-  one.end();
+  
+  if (wPressed == true) {
+    one.accelerate(.1);
+  } else if (sPressed == true) {
+    one.accelerate(-.1);
+  } else if (aPressed == true) {
+    one.turn(-2);
+  } else if (dPressed == true) {
+    one.turn(2);
+  }
+  
   for (int i = 0; i< stars.length; i++) {
     stars[i].show();
   }
+
+  for (int i = 0; i < asteroids.size(); i++) {
+    asteroids.get(i).show();
+    asteroids.get(i).move();
+    
+    if ( dist(asteroids.get(i).getCenX(), asteroids.get(i).getCenY(), one.getX(), one.getY()) < 20){
+      asteroids.remove(i);
+    }
+    
+  }
+  
 }
 
 public void keyPressed() {
   if (key == 'h') {
     one.hyperspace();
   } else if (key == 'w') {
-    one.accelerate(.1);
+    wPressed = true;
   } else if (key == 'a') {
-    one.turn(-5);
+    aPressed = true;
   } else if (key == 's') {
-    one.accelerate(-.1);
+    sPressed = true;
   } else if (key == 'd') {
-    one.turn(5);
+    dPressed = true;
+  }
+}
+
+public void keyReleased() {
+  if (key == 'w') {
+    wPressed = false;
+    one.en();
+  } else if (key == 'a') {
+    aPressed = false;
+  } else if (key == 's') {
+    sPressed = false;
+    one.en();
+  } else if (key == 'd') {
+    dPressed = false;
   }
 }
