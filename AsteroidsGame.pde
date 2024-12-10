@@ -1,6 +1,7 @@
 Spaceship one = new Spaceship();
 Star [] stars = new Star[150];
 ArrayList <Asteroid> asteroids = new ArrayList <Asteroid>();
+ArrayList <Bullet> bullets = new ArrayList <Bullet>();
 
 boolean wPressed = false;
 boolean aPressed = false;
@@ -21,10 +22,10 @@ public void setup() {
 
 public void draw() {
   background(0);
-  
+
   one.show();
   one.move();
-  
+
   if (wPressed == true) {
     one.accelerate(.1);
   } else if (sPressed == true) {
@@ -34,21 +35,33 @@ public void draw() {
   } else if (dPressed == true) {
     one.turn(2);
   }
-  
+
   for (int i = 0; i< stars.length; i++) {
     stars[i].show();
+  }
+
+  for (int i = 0; i < bullets.size(); i++) {
+    bullets.get(i).show();
+    bullets.get(i).move();
   }
 
   for (int i = 0; i < asteroids.size(); i++) {
     asteroids.get(i).show();
     asteroids.get(i).move();
-    
-    if ( dist(asteroids.get(i).getCenX(), asteroids.get(i).getCenY(), one.getX(), one.getY()) < 20){
+
+    if ( dist(asteroids.get(i).getCenX(), asteroids.get(i).getCenY(), one.getX(), one.getY()) < 20) {
       asteroids.remove(i);
       i--;
     }
-    
   }
+
+  /*for (int i = 0; i < bullets.size(); i++) {
+    if ( dist(asteroids.get(i).getCenX(), asteroids.get(i).getCenY(), one.getX(), one.getY()) < 20) {
+      asteroids.remove(i);
+      bullets.remove(i);
+      i--;
+    }
+  } */
   
 }
 
@@ -63,6 +76,8 @@ public void keyPressed() {
     sPressed = true;
   } else if (key == 'd') {
     dPressed = true;
+  } else if (key == ' ') {
+    bullets.add(new Bullet(one));
   }
 }
 
