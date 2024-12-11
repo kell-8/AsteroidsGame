@@ -49,6 +49,9 @@ public void draw() {
         asteroids.remove(k);
         bullets.remove(i);
         break;
+      } else if (bullets.get(i).getX() > 499 || bullets.get(i).getX() < 0 || bullets.get(i).getY() > 499 || bullets.get(i).getY() < 0 ){
+        bullets.remove(i);
+        break;
       }
     }
   }
