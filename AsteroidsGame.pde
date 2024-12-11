@@ -43,6 +43,14 @@ public void draw() {
   for (int i = 0; i < bullets.size(); i++) {
     bullets.get(i).show();
     bullets.get(i).move();
+
+    for (int k = 0; k < asteroids.size(); k++) {
+      if (dist(bullets.get(i).getX(), bullets.get(i).getY(), asteroids.get(k).getCenX(), asteroids.get(k).getCenY()) < 20) {
+        asteroids.remove(k);
+        bullets.remove(i);
+        break;
+      }
+    }
   }
 
   for (int i = 0; i < asteroids.size(); i++) {
@@ -55,14 +63,6 @@ public void draw() {
     }
   }
 
-  /*for (int i = 0; i < bullets.size(); i++) {
-    if ( dist(asteroids.get(i).getCenX(), asteroids.get(i).getCenY(), one.getX(), one.getY()) < 20) {
-      asteroids.remove(i);
-      bullets.remove(i);
-      i--;
-    }
-  } */
-  
 }
 
 public void keyPressed() {
