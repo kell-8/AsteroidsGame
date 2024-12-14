@@ -66,6 +66,18 @@ public void draw() {
     }
   }
 
+   if (asteroids.size() == 0) {
+    size(500, 500);
+    fill(255);
+    rect(100, 150, 300, 200);
+    fill(0, 255, 0);
+    textAlign(CENTER);
+    textSize(50);
+    text("YOU WIN! :D", 250, 250);
+    fill(0);
+    textSize(20);
+    text("Refresh your page to play again!", 250, 300);
+  }
 }
 
 public void keyPressed() {
